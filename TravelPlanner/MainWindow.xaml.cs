@@ -23,7 +23,8 @@ namespace TravelPlanner
         public MainWindow()
         {
             InitializeComponent();
-           WeatherForToday.GetLocations("London");
-        }
+            GetWeatherData wd = new GetWeatherData();
+            wd.GetLocations("London");
+                }
     }
 }
