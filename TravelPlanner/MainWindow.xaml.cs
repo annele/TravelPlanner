@@ -24,8 +24,8 @@ namespace TravelPlanner
         {
             InitializeComponent();
             GetWeatherData wd = new GetWeatherData();
-           // wd.GetLocations("London");
-            wd.GetWeatherForDay("London United Kingdom", "London");
+            wd.GetLocations("London");
+            wd.GetWeatherForDay("London","London United Kingdom");
         }
     }
 }

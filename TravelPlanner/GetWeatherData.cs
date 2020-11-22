@@ -15,19 +15,28 @@ namespace TravelPlanner
 
 
         WeatherForDay wfd = new WeatherForDay();
-       
+
+
 
         // getlocations(string cityname) => dictionary of String-Citoies(Country) - key
         // getWeatherForCity(string cityname) => list of WetherForDay
-
+        public String getApiKey()
+        {
+            string configs = System.IO.File.ReadAllText(@"..\..\config.txt");
+            string weatherApikey = configs.Split('=')[1];
+            return weatherApikey;
+        }
 
         public Dictionary<string, string> GetLocations(string cityname)
         {
+
+            string configs = System.IO.File.ReadAllText(@"..\..\config.txt");
+            string weatherApikey = configs.Split('=')[1];
             WebClient w = new WebClient();
             var locationsList = new Dictionary<String, String>();
-            var APIKEY = ConfigurationManager.AppSettings["WEATHERAPIKEY"];
-
-            var s = w.DownloadString($"http://dataservice.accuweather.com/locations/v1/cities/search?apikey={APIKEY}&q={cityname}");
+            //   var APIKEY = ConfigurationManager.AppSettings["WEATHERAPIKEY"];
+            var weatherApiKey = getApiKey();
+            var s = w.DownloadString($"http://dataservice.accuweather.com/locations/v1/cities/search?apikey={weatherApikey}&q={cityname}");
 
             JArray o = JArray.Parse(s);
             //var key = o[0]["Key"].ToString();
@@ -49,21 +58,22 @@ namespace TravelPlanner
             return locationsList;
         }
 
-         public  List<string> GetWeatherForDay(string location, string cityname)
+         public  List<string> GetWeatherForDay(string cityname, string location)
          {
              List<string> weatherForDay = new List<string>();
             var APIKEY = ConfigurationManager.AppSettings["WEATHERAPIKEY"];
 
             WebClient w = new WebClient();
-             //   var key = getLocations(cityname);
-             var locationkey = GetLocations(cityname).ContainsKey(location);
-
+            //   var key = getLocations(cityname);
+            // var locationkey = GetLocations(cityname).ContainsKey(location);
+            var locationkey = 335012;
              var s = w.DownloadString($"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{locationkey}?apikey={APIKEY}&metric=true");
 
              JObject o = JObject.Parse(s);
+           
 
-         //  int temp = o.SelectToken("DailyForecasts[0].")
-
+             //var temp = o["DailyForecasts"].ToString();
+            string temp = (string)o.SelectToken("DailyForecasts[0].Temperature.Value").ToString();
 
              return weatherForDay;
          }
