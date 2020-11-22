@@ -6,36 +6,41 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using System.IO;
 
 namespace TravelPlanner
 {
     public class GetWeatherData
     {
 
-
-
         WeatherForDay wfd = new WeatherForDay();
 
-
-
-        // getlocations(string cityname) => dictionary of String-Citoies(Country) - key
-        // getWeatherForCity(string cityname) => list of WetherForDay
         public String getApiKey()
+
         {
-            string configs = System.IO.File.ReadAllText(@"..\..\config.txt");
-            string weatherApikey = configs.Split('=')[1];
+            string filePath = @"..\..\config.txt";
+            string weatherApikey = "";
+            
+            if (File.Exists(filePath))
+            {
+                string configs = System.IO.File.ReadAllText(filePath);
+                weatherApikey = configs.Split('=')[1];
+
+            } else
+            {
+                throw new FileNotFoundException();
+            }
             return weatherApikey;
         }
 
         public Dictionary<string, string> GetLocations(string cityname)
         {
 
-            string configs = System.IO.File.ReadAllText(@"..\..\config.txt");
-            string weatherApikey = configs.Split('=')[1];
+     
             WebClient w = new WebClient();
             var locationsList = new Dictionary<String, String>();
-            //   var APIKEY = ConfigurationManager.AppSettings["WEATHERAPIKEY"];
-            var weatherApiKey = getApiKey();
+            
+            var weatherApikey = getApiKey();
             var s = w.DownloadString($"http://dataservice.accuweather.com/locations/v1/cities/search?apikey={weatherApikey}&q={cityname}");
 
             JArray o = JArray.Parse(s);
@@ -61,13 +66,14 @@ namespace TravelPlanner
          public  List<string> GetWeatherForDay(string cityname, string location)
          {
              List<string> weatherForDay = new List<string>();
-            var APIKEY = ConfigurationManager.AppSettings["WEATHERAPIKEY"];
+           
+            var weatherApikey = getApiKey();
 
             WebClient w = new WebClient();
             //   var key = getLocations(cityname);
-            // var locationkey = GetLocations(cityname).ContainsKey(location);
-            var locationkey = 335012;
-             var s = w.DownloadString($"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{locationkey}?apikey={APIKEY}&metric=true");
+             var locationkey = GetLocations(cityname).ContainsKey(location);
+            //var locationkey = 335012;
+             var s = w.DownloadString($"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{locationkey}?apikey={weatherApikey}&metric=true");
 
              JObject o = JObject.Parse(s);
            
@@ -79,24 +85,6 @@ namespace TravelPlanner
          }
 
 
-         /*   private void button1_Click(object sender, EventArgs e)
-            {
-                WebClient w = new WebClient();
-                var APIKEY = "h3Zqp9u0nCYAwzdKpAqLpEMdKACihESd";
-                var city = "vienna";
-
-                var s = w.DownloadString($"http://dataservice.accuweather.com/locations/v1/cities/search?apikey={APIKEY}&q={city}");
-                //   var test = s.TrimStart(new char[] { '[' }).TrimEnd(new char[] { ']' });
-                JArray o = JArray.Parse(s);
-                var key = o[0]["Key"].ToString();
-
-                foreach (var bla in o)
-                {
-                    var we = new WeatherForDay();
-                    we.Clouds = o[0]["Key"].ToString();
-                }
-
-            }
-        }*/
+        
     }
 }
