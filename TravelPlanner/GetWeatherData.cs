@@ -13,20 +13,20 @@ namespace TravelPlanner
     public class GetWeatherData
     {
 
-        WeatherForDay wfd = new WeatherForDay();
 
         public String getApiKey()
 
         {
             string filePath = @"..\..\config.txt";
             string weatherApikey = "";
-            
+
             if (File.Exists(filePath))
             {
                 string configs = System.IO.File.ReadAllText(filePath);
                 weatherApikey = configs.Split('=')[1];
 
-            } else
+            }
+            else
             {
                 throw new FileNotFoundException();
             }
@@ -36,17 +36,14 @@ namespace TravelPlanner
         public Dictionary<string, string> GetLocations(string cityname)
         {
 
-     
+
             WebClient w = new WebClient();
             var locationsList = new Dictionary<String, String>();
-            
-            var weatherApikey = getApiKey();
-            var s = w.DownloadString($"http://dataservice.accuweather.com/locations/v1/cities/search?apikey={weatherApikey}&q={cityname}");
 
-            JArray o = JArray.Parse(s);
-            //var key = o[0]["Key"].ToString();
-            //var city = o[0]["LocalizedName"].ToString();
-            // var country = o[0]["Country"]["LocalizedName"].ToString();
+            var weatherApikey = getApiKey();
+            var locations = w.DownloadString($"http://dataservice.accuweather.com/locations/v1/cities/search?apikey={weatherApikey}&q={cityname}");
+
+            JArray o = JArray.Parse(locations);
 
             for (int i = 0; i < o.Count; i++)
             {
@@ -63,28 +60,35 @@ namespace TravelPlanner
             return locationsList;
         }
 
-         public  List<string> GetWeatherForDay(string cityname, string location)
-         {
-             List<string> weatherForDay = new List<string>();
-           
+        public WeatherForDay GetWeatherForDay(string cityname, string location)
+        {
+            WeatherForDay wfd = new WeatherForDay();
+
+
             var weatherApikey = getApiKey();
-
             WebClient w = new WebClient();
-            //   var key = getLocations(cityname);
-             var locationkey = GetLocations(cityname).ContainsKey(location);
-            //var locationkey = 335012;
-             var s = w.DownloadString($"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{locationkey}?apikey={weatherApikey}&metric=true");
 
-             JObject o = JObject.Parse(s);
-           
+            // var locationkey = GetLocations(cityname).ContainsKey(location);
+            var locationkey = 335012;
+            var weatherData = w.DownloadString($"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{locationkey}?apikey={weatherApikey}&metric=true");
 
-             //var temp = o["DailyForecasts"].ToString();
-            string temp = (string)o.SelectToken("DailyForecasts[0].Temperature.Value").ToString();
+            JObject o = JObject.Parse(weatherData);
 
-             return weatherForDay;
-         }
+            wfd.TempDay = (double)o.SelectToken("DailyForecasts[0].Temperature.Maximum.Value");
+            wfd.TempNight = (double)o.SelectToken("DailyForecasts[0].Temperature.Minimum.Value");
+
+            wfd.Date = (DateTime)o.SelectToken("DailyForecasts[0].Date");
+
+            wfd.HeadlineText = (string)o.SelectToken("Headline[0].Text");
+            wfd.IconNumberDay = (int)o.SelectToken("DailyForecasts[0].Day.Icon");
+
+            wfd.IconNumbeNight = (int)o.SelectToken("DailyForecasts[0].Night.Icon");
 
 
-        
+            return wfd;
+        }
+
+
+
     }
 }
