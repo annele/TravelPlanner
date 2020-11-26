@@ -20,12 +20,52 @@ namespace TravelPlanner
     /// </summary>
     public partial class MainWindow : Window
     {
+        public GetWeatherData wd;
+        public WeatherForDay TodaysWeather;
+
         public MainWindow()
         {
             InitializeComponent();
-            GetWeatherData wd = new GetWeatherData();
-           // wd.GetLocations("London");
-            wd.GetWeatherForDay("London","London United Kingdom");
+
+            wd = new GetWeatherData();
+
+            try
+            {
+                //    var y = wd.GetLocations("London");
+
+
+
+
+                // var x  = wd.GetWeatherForDay("335012");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.StackTrace);
+            }
+            // wd.GetLocations("London");
         }
-    }
+
+        private void lb1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //do stuff
+            // MessageBox.Show(lb1.SelectedItem.ToString());
+            MessageBox.Show(((KeyValuePair<string, string>)lb1.SelectedItem).Key);
+
+        }
+
+        private void OKButton_Click(object sender, RoutedEventArgs e)
+        {
+            ((Button)sender).Background = Brushes.Red;
+
+            var x = wd.GetLocations(CitySearch.Text);
+
+            foreach (var loc in x)             // Should be replaced with DataBindings
+            {                                  // Should be replaced with DataBindings
+                lb1.Items.Add(loc);            // Should be replaced with DataBindings
+                //CitySearch.Text = "boo!";
+            }                                  // Should be replaced with DataBindings
+
+        }
+
+    }       
 }

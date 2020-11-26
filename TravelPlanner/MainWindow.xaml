@@ -7,6 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="2">
+            <TextBox x:Name="CitySearch" Text="{Binding ElementName=CitySearch, Path=Text}" Background="Azure"  Height="55"/>
+            <Button x:Name="ButtonOK" Click="OKButton_Click">Search</Button>
+            <ListBox x:Name="lb1" SelectionChanged="lb1_SelectionChanged"/>
+        </StackPanel>
     </Grid>
 </Window>

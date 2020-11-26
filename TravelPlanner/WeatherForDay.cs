@@ -29,8 +29,6 @@ namespace TravelPlanner
 
         public String Clouds { get; set; }
 
-
-
     }
 
 }
