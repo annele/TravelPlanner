@@ -8,26 +8,57 @@ namespace TravelPlanner
 {
    public  class WeatherForDay
     {
-        private DateTime date;
-        private int iconNumberDay;
-        private int iconNumberNight;
-        private double tempDay;
-        private double tempNight;
-        private string clouds;
-        private string headlineTexts;
+        private DateTime _date;
+        private int _iconNumberDay;
+        private int _iconNumberNight;
+        private double _tempDay;
+        private double _tempNight;
+        private string _clouds;
+        private string _headlineTexts;
 
-        public string HeadlineText { get; set; }
+        
 
-        public DateTime Date { get; set; }
+        public int IconNumberDay
+        {
+            get { return _iconNumberDay; }
+            set { _iconNumberDay = value ; }
+        }
 
-        public int IconNumbeNight { get; set; }
+        public string HeadlineText {
+            get { return _headlineTexts; }
+            set { _headlineTexts= value; }
+        }
 
-        public int IconNumberDay { get; set; }
-        public  double TempDay { get; set; }
+        public DateTime Date
+        {
+            get { return _date; }
+            set { _date=value  ; }
+        }
 
-        public double TempNight { get; set; }
+        public int IconNumbeNight
+        {
+            get { return _iconNumberNight; }
+            set { _iconNumberNight=value; }
+        }
 
-        public String Clouds { get; set; }
+        
+        public  double TempDay
+        {
+            get { return _tempDay; }
+            set { _tempDay = value; }
+        }
+
+        public double TempNight
+        {
+            get { return _tempNight; }
+            set { _tempNight = value ; }
+        }
+
+        public String Clouds
+        {
+            get { return _clouds; }
+            set { value = _clouds; }
+        }
 
     }
 

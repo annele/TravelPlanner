@@ -22,6 +22,7 @@ namespace TravelPlanner
     {
         public GetWeatherData wd;
         public WeatherForDay TodaysWeather;
+        public CityResult cityResult;
 
         public MainWindow()
         {
@@ -49,23 +50,27 @@ namespace TravelPlanner
         {
             //do stuff
             // MessageBox.Show(lb1.SelectedItem.ToString());
-            MessageBox.Show(((KeyValuePair<string, string>)lb1.SelectedItem).Key);
+         //   MessageBox.Show(((KeyValuePair<string, string>)lb1.SelectedItem).Key);
 
         }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
             ((Button)sender).Background = Brushes.Red;
-
-            var x = wd.GetLocations(CitySearch.Text);
-
+            
+           var x = wd.GetLocations(CitySearch.Text);
+            
             foreach (var loc in x)             // Should be replaced with DataBindings
             {                                  // Should be replaced with DataBindings
-                lb1.Items.Add(loc);            // Should be replaced with DataBindings
+                          // Should be replaced with DataBindings
                 //CitySearch.Text = "boo!";
             }                                  // Should be replaced with DataBindings
 
         }
 
+        private void cityresult_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }       
 }

@@ -101,6 +101,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CityResult.cs" />
     <Compile Include="WeatherForDay.cs" />
     <Compile Include="GetWeatherData.cs" />
     <Compile Include="MainWindow.xaml.cs">
