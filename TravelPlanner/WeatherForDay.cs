@@ -13,7 +13,6 @@ namespace TravelPlanner
         private int _iconNumberNight;
         private double _tempDay;
         private double _tempNight;
-        private string _clouds;
         private string _headlineTexts;
 
         
@@ -52,12 +51,6 @@ namespace TravelPlanner
         {
             get { return _tempNight; }
             set { _tempNight = value ; }
-        }
-
-        public String Clouds
-        {
-            get { return _clouds; }
-            set { value = _clouds; }
         }
 
     }

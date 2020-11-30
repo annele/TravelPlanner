@@ -50,27 +50,33 @@ namespace TravelPlanner
         {
             //do stuff
             // MessageBox.Show(lb1.SelectedItem.ToString());
-         //   MessageBox.Show(((KeyValuePair<string, string>)lb1.SelectedItem).Key);
+            //   MessageBox.Show(((KeyValuePair<string, string>)lb1.SelectedItem).Key);
 
         }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
             ((Button)sender).Background = Brushes.Red;
-            
-           var x = wd.GetLocations(CitySearch.Text);
-            
-            foreach (var loc in x)             // Should be replaced with DataBindings
-            {                                  // Should be replaced with DataBindings
-                          // Should be replaced with DataBindings
-                //CitySearch.Text = "boo!";
-            }                                  // Should be replaced with DataBindings
+
+            var x = wd.GetLocations(CitySearch.Text);
+            foreach(var res in x)
+            {
+                x.Add(cityResult);
+
+            }
+
+            // foreach (var loc in x)
+
+            //{                                  // Should be replaced with DataBindings
+
+
+            // }                                  // Should be replaced with DataBindings
 
         }
 
         private void cityresult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            MessageBox.Show(lvCityresult.ToString());
         }
-    }       
+    }
 }
