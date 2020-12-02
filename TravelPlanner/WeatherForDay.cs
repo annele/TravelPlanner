@@ -53,6 +53,11 @@ namespace TravelPlanner
             set { _tempNight = value ; }
         }
 
+        public WeatherForDay()
+        {
+
+        }
+
     }
 
 }

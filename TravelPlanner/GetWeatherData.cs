@@ -20,7 +20,7 @@ namespace TravelPlanner
 
             string filePath = @"..\..\config.txt";
             string weatherApikey = "";
-
+         
             if (File.Exists(filePath))
             {
                 string configs = System.IO.File.ReadAllText(filePath);
@@ -29,6 +29,7 @@ namespace TravelPlanner
             }
             else
             {
+                
                 return null;
             }
             return weatherApikey;
@@ -44,7 +45,7 @@ namespace TravelPlanner
             var weatherApikey = getApiKey();
             if(weatherApikey == null)
             {
-                //errormessage etc 
+                
             }
             var locations = w.DownloadString($"http://dataservice.accuweather.com/locations/v1/cities/search?apikey={weatherApikey}&q={cityname}");
 
@@ -69,7 +70,7 @@ namespace TravelPlanner
             return locationsList;
         }
 
-        public WeatherForDay GetWeatherForDay(int locationkey)  // should just take in the location key 
+        public WeatherForDay GetWeatherFor5Days(int locationkey)  // should just take in the location key 
         {
             WeatherForDay wfd = new WeatherForDay();
 
@@ -78,22 +79,25 @@ namespace TravelPlanner
             WebClient w = new WebClient();
 
             
-            // locationkey = 335012;
-            var weatherData = w.DownloadString($"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{locationkey}?apikey={weatherApikey}&metric=true");
+             //locationkey = 335012;
+            var weatherData = w.DownloadString($"http://dataservice.accuweather.com/forecasts/v1/daily/5day/{locationkey}?apikey={weatherApikey}&metric=true");  //change to 15 days 
 
             JObject o = JObject.Parse(weatherData);
+          //  wfd.TempDay = (double)o.SelectToken("DailyForecasts[0].Temperature.Maximum.Value");
 
-            wfd.TempDay = (double)o.SelectToken("DailyForecasts[0].Temperature.Maximum.Value");
-            wfd.TempNight = (double)o.SelectToken("DailyForecasts[0].Temperature.Minimum.Value");
+            for (int i = 0; i < o.Count; i++)
+            {
+                wfd.TempDay = Convert.ToDouble( o.SelectToken("DailyForecasts[i].Temperature.Maximum.Value"));
+                wfd.TempNight = (double)o.SelectToken("DailyForecasts[i].Temperature.Minimum.Value");
 
-            wfd.Date = (DateTime)o.SelectToken("DailyForecasts[0].Date");
+                wfd.Date = (DateTime)o.SelectToken("DailyForecasts[i].Date"); //hint: DateTime.Parse Funtion.
 
-            wfd.HeadlineText = (string)o.SelectToken("Headline[0].Text");
-            wfd.IconNumberDay = (int)o.SelectToken("DailyForecasts[0].Day.Icon");
+                wfd.HeadlineText = (string)o.SelectToken("Headline[i].Text");
+                wfd.IconNumberDay = (int)o.SelectToken("DailyForecasts[i].Day.Icon");
 
-            wfd.IconNumbeNight = (int)o.SelectToken("DailyForecasts[0].Night.Icon");
+                wfd.IconNumbeNight = (int)o.SelectToken("DailyForecasts[i].Night.Icon");
 
-
+            }
             return wfd;
         }
 

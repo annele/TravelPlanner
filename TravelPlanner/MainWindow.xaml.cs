@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,21 +22,26 @@ namespace TravelPlanner
     public partial class MainWindow : Window
     {
         public GetWeatherData wd;
-        public WeatherForDay TodaysWeather;
-        public CityResult cityResult;
+        public WeatherForDay Weather;
+        public CityResult UserSelectedCityResult;
+
+        private CityResult myVar = new CityResult();
+
+       // public ObservableCollection<WeatherForDay> WeatherForDay { get; set; } = new ObservableCollection<WeatherForDay>();
+
+        public ObservableCollection<CityResult> CityResults { get; set; } = new ObservableCollection<CityResult>();
 
         public MainWindow()
-        {
-            InitializeComponent();
+        {   
 
+            InitializeComponent();
+           
             wd = new GetWeatherData();
+           // wd.GetWeatherForDay(335012);
 
             try
             {
                 //    var y = wd.GetLocations("London");
-
-
-
 
                 // var x  = wd.GetWeatherForDay("335012");
             }
@@ -46,37 +52,47 @@ namespace TravelPlanner
             // wd.GetLocations("London");
         }
 
-        private void lb1_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //do stuff
-            // MessageBox.Show(lb1.SelectedItem.ToString());
-            //   MessageBox.Show(((KeyValuePair<string, string>)lb1.SelectedItem).Key);
 
-        }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
-            ((Button)sender).Background = Brushes.Red;
+            var but = sender as Button;
+            but.Background = Brushes.Red;
+     
 
             var x = wd.GetLocations(CitySearch.Text);
+            // var y = x[0];
+            CityResults.Clear();
             foreach(var res in x)
-            {
-                x.Add(cityResult);
-
-            }
-
-            // foreach (var loc in x)
-
-            //{                                  // Should be replaced with DataBindings
-
-
-            // }                                  // Should be replaced with DataBindings
+                CityResults.Add(res);
+           
+        
 
         }
 
-        private void cityresult_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListCityResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MessageBox.Show(lvCityresult.ToString());
+            var crListView = sender as ListView;
+            UserSelectedCityResult = crListView.SelectedItem as CityResult;
+            crListView.Visibility = Visibility.Collapsed;
+
+            
+
+        }
+
+        private void CitySearch_TextChanged(object sender, TextChangedEventArgs e)
+       {
+            var tb = sender as TextBlock;
+            ListCitryResult.Visibility = Visibility.Visible;
+
+
+        }
+
+        private void WeatherList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var cityKey = UserSelectedCityResult.ID;
+            Weather = wd.GetWeatherFor5Days(cityKey);
+      
         }
     }
 }
