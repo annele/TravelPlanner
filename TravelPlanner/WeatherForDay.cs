@@ -53,11 +53,21 @@ namespace TravelPlanner
             set { _tempNight = value ; }
         }
 
-        public WeatherForDay()
-        {
+      
 
+        public WeatherForDay(DateTime date, int iconNumberDay, int iconNumberNight, double tempDay, double tempNight, string headlineTexts)
+        {
+            _date = date;
+            _iconNumberDay = iconNumberDay;
+            _iconNumberNight = iconNumberNight;
+            _tempDay = tempDay;
+            _tempNight = tempNight;
+            _headlineTexts = headlineTexts;
         }
 
+        public WeatherForDay()
+        {
+        }
     }
 
 }

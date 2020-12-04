@@ -72,8 +72,10 @@ namespace TravelPlanner
 
         public WeatherForDay GetWeatherFor5Days(int locationkey)  // should just take in the location key 
         {
+
             WeatherForDay wfd = new WeatherForDay();
 
+            //public WeatherForDay wfd;
 
             var weatherApikey = getApiKey();
             WebClient w = new WebClient();
@@ -83,21 +85,27 @@ namespace TravelPlanner
             var weatherData = w.DownloadString($"http://dataservice.accuweather.com/forecasts/v1/daily/5day/{locationkey}?apikey={weatherApikey}&metric=true");  //change to 15 days 
 
             JObject o = JObject.Parse(weatherData);
-          //  wfd.TempDay = (double)o.SelectToken("DailyForecasts[0].Temperature.Maximum.Value");
+               
+
 
             for (int i = 0; i < o.Count; i++)
             {
-                wfd.TempDay = Convert.ToDouble( o.SelectToken("DailyForecasts[i].Temperature.Maximum.Value"));
-                wfd.TempNight = (double)o.SelectToken("DailyForecasts[i].Temperature.Minimum.Value");
+                wfd.HeadlineText = o["Headline"]["Text"].ToString();
+                wfd.TempDay = Convert.ToDouble( o["DailyForecasts"][i]["Temperature"]["Maximum"]["Value"]);
+                wfd.TempNight = Convert.ToDouble(  o["DailyForecasts"][i]["Temperature"]["Minimum"]["Value"]);
+                wfd.IconNumberDay = Convert.ToInt32(o["DailyForecasts"][i]["Day"]["Icon"]);
+                wfd.IconNumbeNight = Convert.ToInt32(o["DailyForecasts"][i]["Night"]["Icon"]);
 
-                wfd.Date = (DateTime)o.SelectToken("DailyForecasts[i].Date"); //hint: DateTime.Parse Funtion.
+                //  wfd.Date = Convert.ToDateTime(o.SelectToken("DailyForecasts"+i+".Dai+te")); //hint: DateTime.Parse Funtion.
 
-                wfd.HeadlineText = (string)o.SelectToken("Headline[i].Text");
-                wfd.IconNumberDay = (int)o.SelectToken("DailyForecasts[i].Day.Icon");
+                // wfd.HeadlineText = (string)o.SelectToken("Headline"+i+".Text");
+                //   wfd.IconNumberDay = Convert.ToInt32(o.SelectToken("DailyForecasts"+i+".Day.Icon"));
 
-                wfd.IconNumbeNight = (int)o.SelectToken("DailyForecasts[i].Night.Icon");
+                //   wfd.IconNumbeNight = Convert.ToInt32(o.SelectToken("DailyForecasts"+i+".Night.Icon"));
 
             }
+
+
             return wfd;
         }
 

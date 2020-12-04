@@ -37,7 +37,7 @@ namespace TravelPlanner
             InitializeComponent();
            
             wd = new GetWeatherData();
-           // wd.GetWeatherForDay(335012);
+            wd.GetWeatherFor5Days(335012);
 
             try
             {
