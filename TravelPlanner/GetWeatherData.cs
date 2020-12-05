@@ -12,11 +12,15 @@ using System.Collections.ObjectModel;
 namespace TravelPlanner
 {
     public class GetWeatherData
+
     {
+
+        /// <summary>
+        /// getting APIKEY from config file
+        /// </summary>
+        /// <returns></returns>
         private String getApiKey()
-
         {
-
 
             string filePath = @"..\..\config.txt";
             string weatherApikey = "";
@@ -35,9 +39,14 @@ namespace TravelPlanner
             return weatherApikey;
         }
 
+        /// <summary>
+        /// Getting data about target location (city) chosen by the user
+        /// </summary>
+        /// <param name="cityname"></param>
+        /// <returns></returns>
+
         public ObservableCollection<CityResult> GetLocations(string cityname)
         {
-
 
             WebClient w = new WebClient();
             var locationsList = new ObservableCollection<CityResult>();
@@ -66,9 +75,15 @@ namespace TravelPlanner
                 locationsList.Add(new CityResult(locationKey, location, latidude, longitute));
             }
 
-
             return locationsList;
         }
+
+
+        /// <summary>
+        /// getting weather forecast for 5 days for the target location bz using the location key 
+        /// </summary>
+        /// <param name="locationkey"></param>
+        /// <returns></returns>
 
         public ObservableCollection<WeatherResult> GetWeatherFor5Days(int locationkey)  // should just take in the location key 
         {
@@ -78,10 +93,9 @@ namespace TravelPlanner
             var weatherApikey = getApiKey();
             WebClient w = new WebClient();
 
-            var weatherData = w.DownloadString($"http://dataservice.accuweather.com/forecasts/v1/daily/5day/{locationkey}?apikey={weatherApikey}&metric=true");  //change to 15 days 
+            var weatherData = w.DownloadString($"http://dataservice.accuweather.com/forecasts/v1/daily/5day/{locationkey}?apikey={weatherApikey}&metric=true");  
 
             JObject o = JObject.Parse(weatherData);
-
 
             for (int i = 0; i < o["DailyForecasts"].Count(); i++)
             {

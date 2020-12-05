@@ -54,7 +54,11 @@ namespace TravelPlanner
             // wd.GetLocations("London");
         }
 
-
+        /// <summary>
+        /// action done after clicking the button "Search": getLocations method is called and the location data is calculated
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
@@ -67,8 +71,7 @@ namespace TravelPlanner
             CityResults.Clear();
             foreach(var res in x)
                 CityResults.Add(res);
-           
-        
+               
 
         }
 
@@ -97,22 +100,12 @@ namespace TravelPlanner
             var tb = sender as TextBlock;
             ListCitryResult.Visibility = Visibility.Visible;
 
-
-
-
         }
 
-        private void WeatherList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var cityKey = UserSelectedCityResult.ID;
-            var w = wd.GetWeatherFor5Days(cityKey);
-            foreach(var res in w)
-            {
-                WeatherResults.Add(res);
-            }
 
-            var crListView = sender as ListView;
-            Weather = crListView.SelectedItem as WeatherResult;
+        private void GoBAckButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

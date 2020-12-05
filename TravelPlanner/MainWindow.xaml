@@ -13,42 +13,45 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.ColumnSpan="2">
-            <TextBox x:Name="CitySearch"  Background="Azure"  Height="55" TextChanged="CitySearch_TextChanged"/>
-            <Button x:Name="ButtonOK" Click="OKButton_Click">Search</Button>
-            <ListView Name ="ListCitryResult" ItemsSource="{Binding Path=CityResults}" SelectionChanged="ListCityResult_SelectionChanged" Visibility="Collapsed" IsSynchronizedWithCurrentItem="False" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Description}" FontSize="20"></TextBlock>
-                            <TextBlock Text="{Binding Longitude}" FontSize="10"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                    
-                </ListView.ItemTemplate>
-                
-            </ListView>
-            <TextBlock>LALALALa</TextBlock>
-            <ListView Name="WeatherList" ItemsSource="{Binding Path=WeatherResults}" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="Weather Forecase for: "></TextBlock>
-                            <TextBlock Text="{Binding Date}"></TextBlock>
-                            <TextBlock Text="{Binding HeadlineText}"></TextBlock>
-                            <TextBlock Text="Average temperature during the day: "></TextBlock>
-                            <TextBlock Text="{Binding TempDay}"></TextBlock>
-                            <TextBlock Text="{Binding IconNumberDay}"></TextBlock>
-                            <TextBlock Text="Average temperature during the night: "></TextBlock>
-                            <TextBlock Text="{Binding TempNight}"></TextBlock>
-                            <TextBlock Text="{Binding IconNumbeNight}"></TextBlock>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2" Margin="0,0,24,0">
+            <StackPanel Grid.ColumnSpan="2">
+                <TextBox x:Name="CitySearch"  Background="Azure"  Height="55" TextChanged="CitySearch_TextChanged"/>
+                <Button x:Name="ButtonOK" Click="OKButton_Click">Search</Button>
+                <ListView Name ="ListCitryResult" ItemsSource="{Binding Path=CityResults}" SelectionChanged="ListCityResult_SelectionChanged" Visibility="Collapsed" IsSynchronizedWithCurrentItem="False" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Description}" FontSize="20"></TextBlock>
+                                <TextBlock Text="{Binding Longitude}" FontSize="10"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
 
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
-        
-        
+                    </ListView.ItemTemplate>
+
+                </ListView>
+                <TextBlock>LALALALa</TextBlock>
+                <ListView Name="WeatherList" ItemsSource="{Binding Path=WeatherResults}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="Weather Forecase for: "></TextBlock>
+                                <TextBlock Text="{Binding Date}"></TextBlock>
+                                <TextBlock Text="{Binding HeadlineText}"></TextBlock>
+                                <TextBlock Text="Average temperature during the day: "></TextBlock>
+                                <TextBlock Text="{Binding TempDay}"></TextBlock>
+                                <TextBlock Text="{Binding IconNumberDay}"></TextBlock>
+                                <TextBlock Text="Average temperature during the night: "></TextBlock>
+                                <TextBlock Text="{Binding TempNight}"></TextBlock>
+                                <TextBlock Text="{Binding IconNumbeNight}"></TextBlock>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Button x:Name="GoBAckButton" Click="GoBAckButton_Click">go back</Button>
+            </StackPanel>
+        </ScrollViewer>
+
     </Grid>
 </Window>
