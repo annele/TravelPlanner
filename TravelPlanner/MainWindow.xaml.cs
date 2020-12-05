@@ -22,12 +22,12 @@ namespace TravelPlanner
     public partial class MainWindow : Window
     {
         public GetWeatherData wd;
-        public WeatherForDay Weather;
+        public WeatherResult Weather;
         public CityResult UserSelectedCityResult;
+      
+        
 
-        private CityResult myVar = new CityResult();
-
-       // public ObservableCollection<WeatherForDay> WeatherForDay { get; set; } = new ObservableCollection<WeatherForDay>();
+        public ObservableCollection<WeatherResult> WeatherResults { get; set; } = new ObservableCollection<WeatherResult>();
 
         public ObservableCollection<CityResult> CityResults { get; set; } = new ObservableCollection<CityResult>();
 
@@ -37,7 +37,9 @@ namespace TravelPlanner
             InitializeComponent();
            
             wd = new GetWeatherData();
-            wd.GetWeatherFor5Days(335012);
+        
+            
+          //  wd.GetWeatherFor5Days(335012);
 
             try
             {
@@ -76,7 +78,17 @@ namespace TravelPlanner
             UserSelectedCityResult = crListView.SelectedItem as CityResult;
             crListView.Visibility = Visibility.Collapsed;
 
-            
+            var cityKey = UserSelectedCityResult.ID;
+            var w = wd.GetWeatherFor5Days(cityKey);
+            foreach (var res in w)
+            {
+                WeatherResults.Add(res);
+            }
+
+            var wListView = sender as ListView;
+            Weather = wListView.SelectedItem as WeatherResult;
+
+
 
         }
 
@@ -86,13 +98,21 @@ namespace TravelPlanner
             ListCitryResult.Visibility = Visibility.Visible;
 
 
+
+
         }
 
         private void WeatherList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var cityKey = UserSelectedCityResult.ID;
-            Weather = wd.GetWeatherFor5Days(cityKey);
-      
+            var w = wd.GetWeatherFor5Days(cityKey);
+            foreach(var res in w)
+            {
+                WeatherResults.Add(res);
+            }
+
+            var crListView = sender as ListView;
+            Weather = crListView.SelectedItem as WeatherResult;
         }
     }
 }

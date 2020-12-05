@@ -15,8 +15,8 @@ namespace TravelPlanner
         private double _latitude;
         private double _longitude;
 
-        public double Longitude
-        {
+        public double Longitude { 
+        
             get { return _longitude; }
             set { value = _latitude; }
         }

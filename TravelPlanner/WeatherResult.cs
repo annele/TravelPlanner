@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelPlanner
 {
-   public  class WeatherForDay
+   public  class WeatherResult
     {
         private DateTime _date;
         private int _iconNumberDay;
@@ -55,17 +55,17 @@ namespace TravelPlanner
 
       
 
-        public WeatherForDay(DateTime date, int iconNumberDay, int iconNumberNight, double tempDay, double tempNight, string headlineTexts)
+        public WeatherResult(string headlineTexts, DateTime date, int iconNumberDay, double tempDay, int iconNumberNight,  double tempNight )
         {
+            _headlineTexts = headlineTexts;
             _date = date;
             _iconNumberDay = iconNumberDay;
-            _iconNumberNight = iconNumberNight;
             _tempDay = tempDay;
+            _iconNumberNight = iconNumberNight;
             _tempNight = tempNight;
-            _headlineTexts = headlineTexts;
         }
 
-        public WeatherForDay()
+        public WeatherResult()
         {
         }
     }

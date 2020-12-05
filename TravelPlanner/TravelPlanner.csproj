@@ -102,7 +102,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CityResult.cs" />
-    <Compile Include="WeatherForDay.cs" />
+    <Compile Include="WeatherResult.cs" />
     <Compile Include="GetWeatherData.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

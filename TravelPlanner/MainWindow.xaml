@@ -29,14 +29,17 @@
                 
             </ListView>
             <TextBlock>LALALALa</TextBlock>
-            <ListView Name="WeatherList" ItemsSource="{Binding Path=Weather}" SelectionChanged="WeatherList_SelectionChanged">
+            <ListView Name="WeatherList" ItemsSource="{Binding Path=WeatherResults}" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
+                            <TextBlock Text="Weather Forecase for: "></TextBlock>
                             <TextBlock Text="{Binding Date}"></TextBlock>
                             <TextBlock Text="{Binding HeadlineText}"></TextBlock>
+                            <TextBlock Text="Average temperature during the day: "></TextBlock>
                             <TextBlock Text="{Binding TempDay}"></TextBlock>
                             <TextBlock Text="{Binding IconNumberDay}"></TextBlock>
+                            <TextBlock Text="Average temperature during the night: "></TextBlock>
                             <TextBlock Text="{Binding TempNight}"></TextBlock>
                             <TextBlock Text="{Binding IconNumbeNight}"></TextBlock>
 
