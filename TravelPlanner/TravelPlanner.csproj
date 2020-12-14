@@ -38,6 +38,12 @@
     <Reference Include="dotenv.net, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\dotenv.net.2.1.1\lib\netstandard2.0\dotenv.net.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.CssSelectors.1.0.2\lib\net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack.CssSelectors, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.CssSelectors.1.0.2\lib\net45\HtmlAgilityPack.CssSelectors.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -102,6 +108,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="CityResult.cs" />
+    <Compile Include="CafeResult.cs" />
+    <Compile Include="getTheForkWEbSiteData.cs" />
     <Compile Include="WeatherResult.cs" />
     <Compile Include="GetWeatherData.cs" />
     <Compile Include="MainWindow.xaml.cs">

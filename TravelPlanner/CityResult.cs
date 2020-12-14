@@ -12,16 +12,16 @@ namespace TravelPlanner
         private int _id;
         private string _description;
 
-        private double _latitude;
-        private double _longitude;
+        private string _latitude;
+        private string _longitude;
 
-        public double Longitude { 
+        public string Longitude { 
         
             get { return _longitude; }
             set { value = _latitude; }
         }
 
-        public double Latitude
+        public string Latitude
         {
             get { return _latitude; }
             set { _latitude = value; }
@@ -40,7 +40,7 @@ namespace TravelPlanner
             set { _description = value; }
         }
 
-        public CityResult (int id, string description, double longitude, double latitude)
+        public CityResult (int id, string description, string longitude, string latitude)
         {
             this._id = id;
             this._description = description;

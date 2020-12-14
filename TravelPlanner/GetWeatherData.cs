@@ -66,8 +66,10 @@ namespace TravelPlanner
                 var city = o[i]["LocalizedName"].ToString();
                 var country = o[i]["Country"]["LocalizedName"].ToString();
                 var administrativeArea = o[i]["AdministrativeArea"]["LocalizedName"].ToString();
-                var latidude = Convert.ToDouble(o[i]["GeoPosition"]["Latitude"]);
-                var longitute = Convert.ToDouble(o[i]["GeoPosition"]["Longitude"]);
+               // var latidude = Convert.ToDouble(o[i]["GeoPosition"]["Latitude"]);
+               // var longitute = Convert.ToDouble(o[i]["GeoPosition"]["Longitude"]);
+                var latidude = (o[i]["GeoPosition"]["Latitude"]).ToString();
+                var longitute =(o[i]["GeoPosition"]["Longitude"]).ToString();
 
 
                 string location = city + ", " + country + ", " + administrativeArea;
