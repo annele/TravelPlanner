@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,7 @@ namespace TravelPlanner
     public partial class MainWindow : Window
     {
         public GetWeatherData wd;
+        public getTheForkWEbSiteData theFork;
         public WeatherResult Weather;
         public CityResult UserSelectedCityResult;
       
@@ -37,7 +39,8 @@ namespace TravelPlanner
             InitializeComponent();
            
             wd = new GetWeatherData();
-        
+            theFork = new getTheForkWEbSiteData();
+            InitialView();
             
           //  wd.GetWeatherFor5Days(335012);
 
@@ -64,7 +67,7 @@ namespace TravelPlanner
         {
             var but = sender as Button;
             but.Background = Brushes.Red;
-     
+            ListCitryResult.Visibility = Visibility.Visible;
 
             var x = wd.GetLocations(CitySearch.Text);
             // var y = x[0];
@@ -72,6 +75,7 @@ namespace TravelPlanner
             foreach(var res in x)
                 CityResults.Add(res);
                
+            
 
         }
 
@@ -90,6 +94,8 @@ namespace TravelPlanner
 
             var wListView = sender as ListView;
             Weather = wListView.SelectedItem as WeatherResult;
+            WeatherList.Visibility = Visibility.Visible;
+
 
 
 
@@ -97,15 +103,27 @@ namespace TravelPlanner
 
         private void CitySearch_TextChanged(object sender, TextChangedEventArgs e)
        {
-            var tb = sender as TextBlock;
-            ListCitryResult.Visibility = Visibility.Visible;
+        //    var tb = sender as TextBlock;
+        //    ListCitryResult.Visibility = Visibility.Visible;
 
         }
 
 
         private void GoBAckButton_Click(object sender, RoutedEventArgs e)
         {
-
+            InitialView();
         }
+
+        private void InitialView()
+        {
+            WeatherList.Visibility = Visibility.Collapsed;
+            ListCitryResult.Visibility = Visibility.Collapsed;
+            CitySearch.Text = "";
+        }
+
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            theFork.GetCafeResult(UserSelectedCityResult);        }
     }
 }

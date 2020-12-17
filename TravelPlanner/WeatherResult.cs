@@ -34,6 +34,14 @@ namespace TravelPlanner
             set { _date=value  ; }
         }
 
+        public String DisplayDate
+        {
+            get
+            {
+                return _date.ToString("f");
+            }
+        }
+
         public int IconNumbeNight
         {
             get { return _iconNumberNight; }
@@ -65,9 +73,6 @@ namespace TravelPlanner
             _tempNight = tempNight;
         }
 
-        public WeatherResult()
-        {
-        }
     }
 
 }

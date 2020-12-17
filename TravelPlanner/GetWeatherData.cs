@@ -94,7 +94,7 @@ namespace TravelPlanner
 
             var weatherApikey = getApiKey();
             WebClient w = new WebClient();
-
+     
             var weatherData = w.DownloadString($"http://dataservice.accuweather.com/forecasts/v1/daily/5day/{locationkey}?apikey={weatherApikey}&metric=true");  
 
             JObject o = JObject.Parse(weatherData);

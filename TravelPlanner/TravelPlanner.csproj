@@ -110,6 +110,9 @@
     <Compile Include="CityResult.cs" />
     <Compile Include="CafeResult.cs" />
     <Compile Include="getTheForkWEbSiteData.cs" />
+    <Compile Include="Utils\GZipWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WeatherResult.cs" />
     <Compile Include="GetWeatherData.cs" />
     <Compile Include="MainWindow.xaml.cs">
