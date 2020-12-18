@@ -27,7 +27,7 @@ namespace TravelPlanner
             string lat = cityResult.Latitude;
             string lon = cityResult.Longitude;
 
-            url = baseUrl + lat + "," + lon;
+            url = baseUrl + lon + "," + lat;
 
             return url;
         }
@@ -36,7 +36,7 @@ namespace TravelPlanner
         public ObservableCollection <CafeResult> GetCafeResult(CityResult cityResult)
         {
             var cafeResult = new ObservableCollection<CafeResult>();
-            var testURL = getUrl(new CityResult());
+            var testURL = getUrl(cityResult);
 
            // var testURL = getUrl(new CityResult() { Latitude = "48.220778", Longitude = "16.3100205" });
             var wc = new GZipWebClient();
@@ -49,8 +49,14 @@ namespace TravelPlanner
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(test);
 
-         //   var name = htmlDoc.DocumentNode.Elements("a.css - e71x1w.ejesmtr0");
-           var name = htmlDoc.DocumentNode.SelectSingleNode("//a[@class = 'css - e71x1w.ejesmtr0']").InnerText;
+            //   var name = htmlDoc.DocumentNode.Elements("a.css - e71x1w.ejesmtr0");
+               var name = htmlDoc.DocumentNode.SelectSingleNode("//a[@class = 'css-1lxw1q9 ejesmtr0']").InnerText;
+             var address = htmlDoc.DocumentNode.SelectSingleNode("//p[@class = 'css-axj1nn ejesmtr0']").InnerText;
+            var type = htmlDoc.DocumentNode.SelectSingleNode("//span[@class = 'enrzupw0 css-1ujxl3z ejesmtr0']").InnerText;
+            var averagePrice = htmlDoc.DocumentNode.SelectSingleNode("//p[@class = 'css-a7e1wa ejesmtr0']/span[2]").InnerText;
+            //var link = htmlDoc.DocumentNode.SelectSingleNode("//span[@class = 'enrzupw0 css-1ujxl3z ejesmtr0']").InnerText;
+            //var type = htmlDoc.DocumentNode.SelectSingleNode("//span[@class = 'enrzupw0 css-1ujxl3z ejesmtr0']").InnerText;
+
 
             //       htmlDoc.DocumentNode.SelectNodes("");
 
