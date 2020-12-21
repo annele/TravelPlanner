@@ -26,12 +26,15 @@ namespace TravelPlanner
         public getTheForkWEbSiteData theFork;
         public WeatherResult Weather;
         public CityResult UserSelectedCityResult;
+        public CafeResult UserSelectionCafeResult;
       
         
 
         public ObservableCollection<WeatherResult> WeatherResults { get; set; } = new ObservableCollection<WeatherResult>();
 
         public ObservableCollection<CityResult> CityResults { get; set; } = new ObservableCollection<CityResult>();
+
+        public ObservableCollection<CafeResult> CafeResults { get; set; } = new ObservableCollection<CafeResult>();
 
         public MainWindow()
         {   
@@ -94,11 +97,7 @@ namespace TravelPlanner
 
             var wListView = sender as ListView;
             Weather = wListView.SelectedItem as WeatherResult;
-            WeatherList.Visibility = Visibility.Visible;
-
-
-
-
+            ListWeatherResult.Visibility = Visibility.Visible;
         }
 
         private void CitySearch_TextChanged(object sender, TextChangedEventArgs e)
@@ -116,14 +115,31 @@ namespace TravelPlanner
 
         private void InitialView()
         {
-            WeatherList.Visibility = Visibility.Collapsed;
+            ListWeatherResult.Visibility = Visibility.Collapsed;
             ListCitryResult.Visibility = Visibility.Collapsed;
             CitySearch.Text = "";
         }
 
         private void TestButton_Click(object sender, RoutedEventArgs e)
         {
+            var btnSender = sender as Button;
+            ListCafeResult.Visibility = Visibility.Visible;
 
-            theFork.GetCafeResult(UserSelectedCityResult);        }
+           
+            var cafeList = theFork.GetCafeResult(UserSelectedCityResult);    
+            foreach(var res in cafeList)
+            {
+                CafeResults.Add(res);
+            }
+
+
+        }
+
+        private void ListCafeResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var crListView = sender as ListView;
+            UserSelectionCafeResult = crListView.SelectedItem as CafeResult;
+           // crListView.Visibility = Visibility.Collapsed;
+        }
     }
 }

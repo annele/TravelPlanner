@@ -29,8 +29,8 @@
                     </ListView.ItemTemplate>
 
                 </ListView>
-                <TextBlock>LALALALa</TextBlock>
-                <ListView Name="WeatherList" ItemsSource="{Binding Path=WeatherResults}">
+               
+                <ListView Name="ListWeatherResult" ItemsSource="{Binding Path=WeatherResults}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -51,6 +51,20 @@
 
                 <Button x:Name="GoBAckButton" Click="GoBAckButton_Click">go back</Button>
                 <Button x:Name="TestButton" Click="TestButton_Click">Test</Button>
+
+                <ListView Name="ListCafeResult" ItemsSource= "{Binding Path=CafeResults}" SelectionChanged="ListCafeResult_SelectionChanged">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding CafeType}"></TextBlock>
+                                <TextBlock Text="{Binding CafeName}"></TextBlock>
+                                <TextBlock Text="{Binding CafeAdress}"></TextBlock>
+                                <TextBlock Text="{Binding AveragePrice}"></TextBlock>
+                                <TextBlock Text="{Binding Rate}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackPanel>
         </ScrollViewer>
 
