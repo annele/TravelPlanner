@@ -27,8 +27,8 @@ namespace TravelPlanner
         public WeatherResult Weather;
         public CityResult UserSelectedCityResult;
         public CafeResult UserSelectionCafeResult;
-      
-        
+
+
 
         public ObservableCollection<WeatherResult> WeatherResults { get; set; } = new ObservableCollection<WeatherResult>();
 
@@ -37,15 +37,15 @@ namespace TravelPlanner
         public ObservableCollection<CafeResult> CafeResults { get; set; } = new ObservableCollection<CafeResult>();
 
         public MainWindow()
-        {   
+        {
 
             InitializeComponent();
-           
+
             wd = new GetWeatherData();
             theFork = new getTheForkWEbSiteData();
             InitialView();
-            
-          //  wd.GetWeatherFor5Days(335012);
+
+            //  wd.GetWeatherFor5Days(335012);
 
             try
             {
@@ -75,10 +75,10 @@ namespace TravelPlanner
             var x = wd.GetLocations(CitySearch.Text);
             // var y = x[0];
             CityResults.Clear();
-            foreach(var res in x)
+            foreach (var res in x)
                 CityResults.Add(res);
-               
-            
+
+
 
         }
 
@@ -101,9 +101,9 @@ namespace TravelPlanner
         }
 
         private void CitySearch_TextChanged(object sender, TextChangedEventArgs e)
-       {
-        //    var tb = sender as TextBlock;
-        //    ListCitryResult.Visibility = Visibility.Visible;
+        {
+            //    var tb = sender as TextBlock;
+            //    ListCitryResult.Visibility = Visibility.Visible;
 
         }
 
@@ -120,26 +120,27 @@ namespace TravelPlanner
             CitySearch.Text = "";
         }
 
-        private void TestButton_Click(object sender, RoutedEventArgs e)
+        private void CafeResult_Click(object sender, RoutedEventArgs e)
         {
             var btnSender = sender as Button;
             ListCafeResult.Visibility = Visibility.Visible;
 
-           
-            var cafeList = theFork.GetCafeResult(UserSelectedCityResult);    
-            foreach(var res in cafeList)
+
+            var cafeList = theFork.GetCafeResult(UserSelectedCityResult);
+            foreach (var res in cafeList)
             {
                 CafeResults.Add(res);
             }
 
-
+            //var crListView = sender as ListView;
+            //UserSelectionCafeResult = crListView.SelectedItem as CafeResult;
         }
 
         private void ListCafeResult_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var crListView = sender as ListView;
-            UserSelectionCafeResult = crListView.SelectedItem as CafeResult;
-           // crListView.Visibility = Visibility.Collapsed;
+           // var crListView = sender as ListView;
+            //UserSelectionCafeResult = crListView.SelectedItem as CafeResult;
+             //crListView.Visibility = Visibility.Visible;
         }
     }
 }

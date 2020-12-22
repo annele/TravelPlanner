@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TravelPlanner
 {
-   public  class WeatherResult
+    public class WeatherResult
     {
         private DateTime _date;
         private int _iconNumberDay;
@@ -15,23 +15,24 @@ namespace TravelPlanner
         private double _tempNight;
         private string _headlineTexts;
 
-        
+
 
         public int IconNumberDay
         {
             get { return _iconNumberDay; }
-            set { _iconNumberDay = value ; }
+            set { _iconNumberDay = value; }
         }
 
-        public string HeadlineText {
+        public string HeadlineText
+        {
             get { return _headlineTexts; }
-            set { _headlineTexts= value; }
+            set { _headlineTexts = value; }
         }
 
         public DateTime Date
         {
             get { return _date; }
-            set { _date=value  ; }
+            set { _date = value; }
         }
 
         public String DisplayDate
@@ -45,11 +46,11 @@ namespace TravelPlanner
         public int IconNumbeNight
         {
             get { return _iconNumberNight; }
-            set { _iconNumberNight=value; }
+            set { _iconNumberNight = value; }
         }
 
-        
-        public  double TempDay
+
+        public double TempDay
         {
             get { return _tempDay; }
             set { _tempDay = value; }
@@ -58,12 +59,12 @@ namespace TravelPlanner
         public double TempNight
         {
             get { return _tempNight; }
-            set { _tempNight = value ; }
+            set { _tempNight = value; }
         }
 
-      
 
-        public WeatherResult(string headlineTexts, DateTime date, int iconNumberDay, double tempDay, int iconNumberNight,  double tempNight )
+
+        public WeatherResult(string headlineTexts, DateTime date, int iconNumberDay, double tempDay, int iconNumberNight, double tempNight)
         {
             _headlineTexts = headlineTexts;
             _date = date;

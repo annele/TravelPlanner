@@ -14,11 +14,6 @@ namespace TravelPlanner
     public class getTheForkWEbSiteData
     {
 
-
-        //CityResult cityResult = new CityResult();
-
-
-
         public string getUrl(CityResult cityResult)
         {
             string url = "";
@@ -56,9 +51,8 @@ namespace TravelPlanner
             string avPriceXpath = "//p[@class = 'css-a7e1wa ejesmtr0']/span[2]";
             string rateXpath = "//span[@class = 'css-17f8ytt e1l48fgb0']/span[1]";
 
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i < 5; i++)
             {
-                //var type = htmlDoc.QuerySelector("span.enrzupw0 css-1ujxl3z ejesmtr0").InnerText;   //("//span[@class = 'enrzupw0 css-1ujxl3z ejesmtr0']").InnerText;
 
                 var type = htmlDoc.DocumentNode.SelectNodes(typeXpath)[i].InnerText;
                 var name = htmlDoc.DocumentNode.SelectNodes(nameXpath)[i].InnerText;
@@ -66,13 +60,11 @@ namespace TravelPlanner
                 var averagePrice = htmlDoc.DocumentNode.SelectNodes(avPriceXpath)[i].InnerText;
                 var rate = htmlDoc.DocumentNode.SelectNodes(rateXpath)[i].InnerText;
 
-                // cafeResult.Add(new CafeResult(type, name, address, averagePrice, rate));
+                cafeResult.Add(new CafeResult(type, name, address, averagePrice, rate));
 
             }
 
             //var link = htmlDoc.DocumentNode.SelectSingleNode("//span[@class = 'enrzupw0 css-1ujxl3z ejesmtr0']").InnerText;
-
-
 
             return cafeResult;
         }

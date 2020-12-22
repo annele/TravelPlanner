@@ -29,7 +29,7 @@
                     </ListView.ItemTemplate>
 
                 </ListView>
-               
+
                 <ListView Name="ListWeatherResult" ItemsSource="{Binding Path=WeatherResults}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -50,7 +50,7 @@
                 </ListView>
 
                 <Button x:Name="GoBAckButton" Click="GoBAckButton_Click">go back</Button>
-                <Button x:Name="TestButton" Click="TestButton_Click">Test</Button>
+                <Button x:Name="CafeResult" Click="CafeResult_Click">Test</Button>
 
                 <ListView Name="ListCafeResult" ItemsSource= "{Binding Path=CafeResults}" SelectionChanged="ListCafeResult_SelectionChanged">
                     <ListView.ItemTemplate>

@@ -63,11 +63,11 @@ namespace TravelPlanner
 
         public CafeResult(string type, string name, string address, string avPrice, string rate)
         {
-            type = _cafeType;
-            name = _cafeName;
-            address = _cafeAddress;
-            avPrice = _averagePrice;
-            rate = _rate;
+            _cafeType = type;
+            _cafeName = name;
+            _cafeAddress = address;
+            _averagePrice = avPrice;
+            _rate = rate;
         }
     }
 }
